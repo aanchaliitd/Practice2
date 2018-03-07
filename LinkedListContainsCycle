@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+class LinkedListNode
+{
+public:
+    int value_;
+    LinkedListNode* next_;
+
+    LinkedListNode(int value) :
+        value_(value),
+        next_(nullptr)
+    {
+    }
+};
+
+bool containsCycle (LinkedListNode* node)
+{
+    bool result = false;
+    
+    if (!node) return false;
+    
+    LinkedListNode *currentNodeSlow = node;
+    LinkedListNode *currentNodeFast = node->next_;
+    
+    while(currentNodeSlow != nullptr && currentNodeFast != nullptr) {
+        if (currentNodeFast == currentNodeSlow)
+            return true;
+        currentNodeSlow = currentNodeSlow->next_;
+        if (currentNodeFast->next_) {
+            currentNodeFast = currentNodeFast->next_->next_;
+        } else {
+            return false;
+        }
+    }
+    
+    return false;
+}
+
+int main ()
+{
+    // run your function through some test cases here
+    // remember: debugging is half the battle!
+    LinkedListNode *node1 = new LinkedListNode(0);
+    LinkedListNode *node2 = new LinkedListNode(1);
+    LinkedListNode *node3 = new LinkedListNode(2);
+    LinkedListNode *node4 = new LinkedListNode(4);
+    
+    node1->next_ = node2;
+    node2->next_ = node3;
+    node3->next_ = node4;
+    node4->next_ = node1;
+    
+    cout << containsCycle(node1);
+    return 0;
+}
