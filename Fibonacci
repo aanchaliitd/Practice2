@@ -1,0 +1,33 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int fib (int n)
+{
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    
+    int prevPrev = 0;
+    int prev = 1;
+    int current = 0;
+    
+    for (int i = 1; i < n; i++) {
+        current = prevPrev + prev;
+        prevPrev = prev;
+        prev = current;
+    }
+    
+    return current;
+}
+
+int main ()
+{
+    // run your function through some test cases here
+    // remember: debugging is half the battle!
+    cout << 0 << " " << fib(0) << endl;
+    cout << 1 << " " << fib(1) << endl;
+    cout << 2 << " " << fib(2) << endl;
+    cout << 3 << " " << fib(3) << endl;
+    cout << 4 << " " << fib(4) << endl;
+    return 0;
+}
