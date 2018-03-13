@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class MaxStack {
+public:
+    void push(int element) {
+        _stack.push(element);
+        if (_max_elem.empty()) {
+            _max_elem.push(element);
+        }
+        else if (_max_elem.top() < element) {
+            _max_elem.push(element);
+        }
+    }
+    
+    int pop() {
+        if (_stack.empty()) return -1;
+        int current_element = _stack.top();
+        if (_max_elem.top() == current_element) {
+            _max_elem.pop();
+        }
+        _stack.pop();
+        return current_element;
+    }
+    
+    int getMax() {
+        if (_max_elem.empty()) return -1;
+        return _max_elem.top();
+    }
+private:
+    stack<int> _stack;
+    stack<int> _max_elem;
+};
+
+int main ()
+{
+    MaxStack m;
+    cout << m.getMax() << endl;
+    m.push(1);
+    cout << m.getMax() << endl;
+    m.push(2);
+    cout << m.getMax() << endl;
+    m.push(3);
+    cout << m.getMax() << endl;
+    m. push(5);
+    cout << m.getMax() << endl;
+    m.push(4);
+    cout << m.getMax() << endl;
+    m.pop();
+    cout << m.getMax() << endl;
+    m.pop();
+    cout << m.getMax() << endl;
+    return 0;
+}
